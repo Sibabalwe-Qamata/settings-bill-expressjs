@@ -4,6 +4,25 @@
     <title></title>
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
+
+     <script  type="text/x-template" class='TemplateBill'>
+          <tr>
+              <td>Call total</td>
+              <td>R<span class="callTotalOne">{{call}}</span></td>
+          </tr>
+
+          <tr>
+              <td>SmS total</td>
+              <td>R<span class="smsTotalOne">{{sms}}</span></td>
+          </tr>
+
+          <tr>
+              <td>Total</td>
+              <td class="red">R <span class="{{color}}"> {{total}}</span></td>
+          </tr>
+    </script>
+
+
   </head>
   <body>
     <div class="container">
@@ -60,7 +79,18 @@
             </div>
             <div class="six columns">
               <h5>Settings</h5>
-              <label for="exampleEmailInput">Call cost</label>
+             
+                <form class="" action="/settings" method="post">
+                <input type="text" name="smsCost" placeholder="enter sms cost">
+                <input type="text" name="callCost" placeholder="enter call cost">
+                <input type="text" name="callCost" placeholder="enter warning level">
+                <input type="text" name="callCost" placeholder="enter critical level">
+                <input type="submit">
+                </form>
+
+
+
+              <!--label for="exampleEmailInput">Call cost</label>
               <input class="u-full-width callCostSetting" type="number" placeholder="eg. 2.55">
               <label for="exampleEmailInput">SMS cost</label>
               <input class="u-full-width smsCostSetting" type="number" placeholder="eg. 0.65" >
@@ -68,17 +98,15 @@
               <input class="u-full-width warningLevelSetting " type="number" placeholder="eg. 30.00" class="warningLevel" >
               <label for="">Critical level</label>
               <input class="u-full-width criticalLevelSetting" type="number" placeholder="eg. 65.00" >
-              <button class="button-primary updateSettings" type="button" name="button">Update settings</button>
+              <button class="button-primary updateSettings" type="button" name="button">Update settings</button-->
 
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="js/calculate-bill.js" charset="utf-8"></script>
-    <script src="js/text-bill.js" charset="utf-8"></script>
-    <script src="js/radio-bill.js" charset="utf-8"></script>
-    <script src="js/settings-bill.js" charset="utf-8"></script>
+   
+    <script src="js/settingsBill.js" charset="utf-8"></script>
 
   </body>
 </html>
