@@ -1,4 +1,4 @@
-function SettingBillFactory()
+module.exports = function ()
 {
         var callsTotalBill = 0;
         var smsTotalBill = 0;
@@ -87,10 +87,5 @@ function SettingBillFactory()
         }
 }
 
- var settings = SettingBillFactory();
-      settings.sms(2.50);
-      
-      settings.calls(5.00);
-      
-      settings.sumBill('call');
+
 
