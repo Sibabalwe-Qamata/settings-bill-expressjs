@@ -1,13 +1,14 @@
+"use strict";
 module.exports = function ()
 {
-        var callsTotalBill = 0;
-        var smsTotalBill = 0;
-        var totalCostbill = 0; 
+        let callsTotalBill = 0;
+        let smsTotalBill = 0;
+        let totalCostbill = 0; 
 
-        var warningVariable = 0;
-        var criticalVariable = 0;
-        var smsCostVariable =0;
-        var callCostVariable =0;
+        let warningVariable = 0;
+        let criticalVariable = 0;
+        let smsCostVariable =0;
+        let callCostVariable =0;
         
     function setCallCost(itemCall)
     {
