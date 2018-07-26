@@ -2,8 +2,9 @@
 "use strict";
 
 //import the settingsBill module that is in the current folder
-const settingsBill = require('./settingsBill');
+const SettingsBill = require('./settingsBill');
 
+const settingsBill = SettingsBill();
 
 let express = require('express');
 let app = express();
@@ -23,7 +24,6 @@ app.use(express.static('public'));
 
 
 //Body parser ...
-
 let bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
@@ -40,11 +40,21 @@ app.get("/", function(req, res){
   });
   
 //set the settings - sms & call price and the warning & critical level
-app.post('/settings', function(){
+app.post('/settings', function(req,res){
     let smsCost = req.body.smsCost;
     let callCost = req.body.callCost;
     let warningLevel = req.body.warningLevel;
     let criticalLevel = req.body.criticalLevel;
+
+    //console.log(callCost);
+    
+
+    settingsBill.calls(callCost);
+    settingsBill.sms(smsCost);
+    settingsBill.critical(criticalLevel);
+    settingsBill.warning(warningLevel);
+
+    console.log(settingsBill.getCallPrice());
 
     let settings = {
       smsCost,
@@ -54,12 +64,10 @@ app.post('/settings', function(){
     };
 
     // process data
-    globalSetings = settings;
+   // globalSetings = settings;
 
     // note that data can be sent to the template
     res.render('home', {settings})
-
-
 
 });
 
@@ -67,15 +75,32 @@ app.post('/settings', function(){
 & a timestamp when record has been entered.**/
 app.post('/action', function(req, res)
 {
+    let item = req.body.getItem;
 
-
-
+    settingsBill.sumBill(item);
+    
+    let BillData = {
+      callSum: settingsBill.calls(),
+      smsSum: settingsBill.sms(),
+      sum: settingsBill.total()
+    }
+  
+    let prices = {
+      callPrice: settingsBill.sumCall(),
+      smsPrice: settingsBill.sumSms(),
+      warningPrice: settingsBill.getWarning(),
+      criticalPrice: settingsBill.getCritical()
+  }
+ 
+    res.render('action', {callData, prices});
 
 });
 
 
 //show all the actions - display the timestamps using fromNow and display a total cost for all the actions on the screen
-app.post('/actions', function(req, res){
+app.get('/actions', function(req, res){
+
+
 
 
 

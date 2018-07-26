@@ -14,7 +14,7 @@ module.exports = function ()
     {
         callCostVariable = parseFloat(itemCall);
         
-        return callCostVariable.toFixed(2);
+       
         
     }
     
@@ -37,7 +37,7 @@ module.exports = function ()
     {
         warningVariable = parseFloat(warning);
         
-        return warningVariable.toFixed(2);
+        //return warningVariable.toFixed(2);
         
     }
     
@@ -61,6 +61,7 @@ module.exports = function ()
     
     function callTotal() {return callsTotalBill.toFixed(2);}
     function smsTotal () {return smsTotalBill.toFixed(2);}
+    function getCallCost() { return callCostVariable;}
 	function getCriticalValue(){return criticalVariable.toFixed(2);}
 	function getWarningValue(){return warningVariable.toFixed(2);}
     
@@ -81,7 +82,8 @@ module.exports = function ()
             sumCall: callTotal,
             sumSms: smsTotal,
 			getWarning: getWarningValue,
-			getCritical: getCriticalValue,
+            getCritical: getCriticalValue,
+            getCallPrice:getCallCost,
             sumTotal: total,
             sumBill: addTotal
 
