@@ -72,27 +72,31 @@ app.post('/settings', function(req,res){
 });
 
 /**record an action of sms or call and the appropriate price based on the settings entered 
-& a timestamp when record has been entered.**/
+& a timestamp when record has been entered.
+
+1. Need to add the timestamp in the object as well.
+**/
+
 app.post('/action', function(req, res)
 {
     let item = req.body.getItem;
 
     settingsBill.sumBill(item);
     
-    let BillData = {
+    /**let BillData = {
       callSum: settingsBill.calls(),
       smsSum: settingsBill.sms(),
       sum: settingsBill.total()
-    }
-  
+    }**/
+    console.log('Call: ',settingsBill.sumCall());
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),
-      warningPrice: settingsBill.getWarning(),
-      criticalPrice: settingsBill.getCritical()
+      totalPrice: settingsBill.sumTotal()
+   
   }
  
-    res.render('action', {callData, prices});
+    res.render('home', { prices});
 
 });
 
