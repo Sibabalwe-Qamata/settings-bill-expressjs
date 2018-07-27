@@ -85,15 +85,11 @@ app.post('/settings', function(req,res){
 app.post('/action', function(req, res)
 {
     let item = req.body.billItemTypeWithSettings;
-    //let item = req.body.getItem;
+  
     console.log(item)
     settingsBill.sumBill(item);
     
-    /**let BillData = {
-      callSum: settingsBill.calls(),
-      smsSum: settingsBill.sms(),
-      sum: settingsBill.total()
-    }**/
+  
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),

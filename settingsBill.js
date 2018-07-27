@@ -42,6 +42,8 @@ module.exports = function ()
     {
     // update the correct total
             if (billItems === "call"){
+                //
+                // time : new Date()
                // if(totalCostbill < criticalVariable){
                     callsTotalBill += callCostVariable;
                    }
