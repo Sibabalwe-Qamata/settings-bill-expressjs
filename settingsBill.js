@@ -14,15 +14,12 @@ module.exports = function ()
     {
         callCostVariable = parseFloat(itemCall);
         
-       
-        
     }
     
     function setSmsCost(itemSmS)
     {
        	smsCostVariable = parseFloat(itemSmS);
         
-        return  smsCostVariable.toFixed(2);
         
     }
     
@@ -30,14 +27,14 @@ module.exports = function ()
     {
         criticalVariable = parseFloat(itemCritical);
         
-        return criticalVariable.toFixed(2);
+        
     }
     
     function setWarning(warning)
     {
         warningVariable = parseFloat(warning);
         
-        //return warningVariable.toFixed(2);
+        
         
     }
     
@@ -45,16 +42,16 @@ module.exports = function ()
     {
     // update the correct total
             if (billItems === "call"){
-                if(totalCostbill < criticalVariable){
+               // if(totalCostbill < criticalVariable){
                     callsTotalBill += callCostVariable;
                    }
                
-            }
+           // }
             if (billItems === "sms"){
-                if (totalCostbill < criticalVariable){
+                //if (totalCostbill < criticalVariable){
                     
                    smsTotalBill += smsCostVariable; 
-                }
+                
                 
             }
     }

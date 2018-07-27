@@ -9,6 +9,11 @@ const settingsBill = SettingsBill();
 let express = require('express');
 let app = express();
 
+
+//Exporting the Moment modules
+const Moment = require('moment');
+let moment = Moment();
+
 //route to redirect to a GET route
 //res.redirect('/target-route');
 
@@ -54,7 +59,7 @@ app.post('/settings', function(req,res){
     settingsBill.critical(criticalLevel);
     settingsBill.warning(warningLevel);
 
-    console.log(settingsBill.getCallPrice());
+    console.log("Call Price: ", settingsBill.getCallPrice());
 
     let settings = {
       smsCost,
@@ -79,8 +84,9 @@ app.post('/settings', function(req,res){
 
 app.post('/action', function(req, res)
 {
-    let item = req.body.getItem;
-
+    let item = req.body.billItemTypeWithSettings;
+    //let item = req.body.getItem;
+    console.log(item)
     settingsBill.sumBill(item);
     
     /**let BillData = {
@@ -88,48 +94,53 @@ app.post('/action', function(req, res)
       smsSum: settingsBill.sms(),
       sum: settingsBill.total()
     }**/
-    console.log('Call: ',settingsBill.sumCall());
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),
       totalPrice: settingsBill.sumTotal()
    
   }
- 
+  console.log('Total: ',prices.callPrice);
+
     res.render('home', { prices});
 
 });
 
 
 //show all the actions - display the timestamps using fromNow and display a total cost for all the actions on the screen
-app.get('/actions', function(req, res){
+app.get('/actions', function(req, res)
+{
 
 
+    /**let Bill = {
+        callBill: settingsBill.sumCall(),
+        smsBill: settingsBill.sumSms(),
+        totalBill: settingsBill.sumTotal()
+    }**/
 
-
-
+    //res.render('home', {Bill});
 });
 
 //display all the sms or call actions - display the timestamps using fromNow and display a total cost for the selected action.
 
-app.get('/actions/:type', function (req, res) {
-    let costType = req.params.costType;
+// app.get('/action/:type', function (req, res) {
+//     let costType = req.params.costType;
 
-    let cost = 0;
-    //lookup cost for costType
-    if (costType === 'sms'){
-        cost = settings.smsCost;
-    } else if (costType === 'call') {
-        cost = settings.callCost;
-    }
+//     let cost = 0;
+//     //lookup cost for costType
+//     if (costType === 'sms'){
+//         cost = settings.smsCost;
+//     } else if (costType === 'call') {
+//         cost = settings.callCost;
+//     }
 
-    req.render('cost', {
-        costType,
-        cost
-    });
+//     req.render('cost', {
+//         costType,
+//         cost
+//     });
     
 
-});
+// });
 
 //--------------------------------------------------------------------------------------------------------------------------//
 let PORT = process.env.PORT || 3007;
