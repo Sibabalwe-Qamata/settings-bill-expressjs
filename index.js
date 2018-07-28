@@ -17,10 +17,13 @@ let moment = Moment();
 //Handlebars Section ...
 const exphbs  = require('express-handlebars');
 
-app.engine('handlebars', exphbs({defaultLayout: 'main',
-helpers:{
-    "updatedDate":function(){
-      return Moment(this.timestamp).fromNow()
+app.engine('handlebars', exphbs(
+{   defaultLayout: 'main',
+    helpers:
+    {
+        "updatedDate":function()
+        {
+             return Moment(this.timestamp).fromNow()
         }
     }
 }));
