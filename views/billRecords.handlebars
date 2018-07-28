@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns box">
+                      <h2>
+                          Phone Bill Records:
+                      </h2>
+
+            {{#each billArray}}
+                <table >
+                    <tr>
+                        <td>type:<</td><td>{{type}}</td>
+                        <td>price:</td><td>{{price}}</td>
+                        <td>date:</</td><td>{{updatedDate}}</td>
+                    </tr>
+                </table>
+           {{/each}}      
+                </div> 
+            </div>
+        </div>
+  </body>
+</html>
