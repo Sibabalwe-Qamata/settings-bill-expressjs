@@ -9,6 +9,8 @@ module.exports = function ()
         let criticalVariable = 0;
         let smsCostVariable =0;
         let callCostVariable =0;
+
+        let color = '';
         
     function setCallCost(itemCall)
     {
@@ -18,9 +20,7 @@ module.exports = function ()
     
     function setSmsCost(itemSmS)
     {
-       	smsCostVariable = parseFloat(itemSmS);
-        
-        
+       	smsCostVariable = parseFloat(itemSmS); 
     }
     
     function setCriticalWarning(itemCritical)
@@ -41,22 +41,39 @@ module.exports = function ()
     function addTotal(billItems)
     {
     // update the correct total
-            if (billItems === "call"){
+            if (billItems === "call")
+            {
                 //
                 // time : new Date()
                // if(totalCostbill < criticalVariable){
                     callsTotalBill += callCostVariable;
-                   }
+            }
                
            // }
-            if (billItems === "sms"){
+            if (billItems === "sms")
+            {
                 //if (totalCostbill < criticalVariable){
                     
                    smsTotalBill += smsCostVariable; 
                 
-                
+            
             }
     }
+
+    function colorChangeRadio()
+    {
+        if (totalCostbill>= getWarningValue() )
+        {
+            color = 'warning';
+            return color;
+        }
+        
+        else if(totalCostbill >= getCriticalValue()){
+            color = 'danger';
+          
+        }
+    }
+
     
     function callTotal() {return callsTotalBill.toFixed(2);}
     function smsTotal () {return smsTotalBill.toFixed(2);}
@@ -82,9 +99,12 @@ module.exports = function ()
             sumSms: smsTotal,
 			getWarning: getWarningValue,
             getCritical: getCriticalValue,
+
+
             getCallPrice:getCallCost,
             sumTotal: total,
-            sumBill: addTotal
+            sumBill: addTotal,
+            colors: colorChangeRadio
 
         }
 }

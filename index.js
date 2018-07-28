@@ -14,15 +14,16 @@ let app = express();
 const Moment = require('moment');
 let moment = Moment();
 
-//route to redirect to a GET route
-//res.redirect('/target-route');
-
-
 //Handlebars Section ...
 const exphbs  = require('express-handlebars');
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main',
+helpers:{
+    "updatedDate":function(){
+      return Moment(this.timestamp).fromNow()
+        }
+    }
+}));
 
 //Static Resource
 app.use(express.static('public'));
