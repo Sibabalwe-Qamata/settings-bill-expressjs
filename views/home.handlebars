@@ -4,8 +4,6 @@
     <title></title>
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
-     <script  type="text/x-template" class='TemplateBill'>
-    </script>
   </head>
   <body>
     <div class="container">
@@ -43,11 +41,6 @@
                <labzel class="">
                    <button class="button-primary" type="submit" name="button">Add</button>
                </labzel>
-              
-                <!--input type="text" name="callCost" placeholder="enter call cost">
-                <input type="text" name="callCost" placeholder="enter warning level">
-                <input type="text" name="callCost" placeholder="enter critical level">
-                <input type="submit"--->
                 </form>
 
               <h5>Totals</h5>
@@ -68,7 +61,7 @@
                       <td>
                         <a href="/actions">Total</a>
                       </td>
-                      <td> R<span class="totalSettings {{color}}">{{prices.totalPrice}}</span> </td>
+                      <td> R<span class="totalSettings {{prices.color}}">{{prices.totalPrice}}</span> </td>
                     </tr>
                   </table>
 
@@ -79,8 +72,8 @@
                 <form class="" action="/settings" method="post">
                 <input type="text" name="smsCost" placeholder="enter sms cost">
                 <input type="text" name="callCost" placeholder="enter call cost">
-                <input type="text" name="callCost" placeholder="enter warning level">
-                <input type="text" name="callCost" placeholder="enter critical level">
+                <input type="text" name="warningLevel" placeholder="enter warning level">
+                <input type="text" name="criticalLevel" placeholder="enter critical level">
                 <input type="submit">
                 </form>
 

@@ -1,4 +1,8 @@
 "use strict";
+
+//Exporting the Moment modules
+const Moment = require('moment');
+let moment = Moment();
 module.exports = function ()
 {
         let callsTotalBill = 0;
@@ -11,11 +15,12 @@ module.exports = function ()
         let callCostVariable =0;
 
         let color = '';
+
+        let billArray = [];
         
     function setCallCost(itemCall)
     {
         callCostVariable = parseFloat(itemCall);
-        
     }
     
     function setSmsCost(itemSmS)
@@ -26,16 +31,13 @@ module.exports = function ()
     function setCriticalWarning(itemCritical)
     {
         criticalVariable = parseFloat(itemCritical);
-        
-        
     }
     
     function setWarning(warning)
     {
+        console.log(warning);
+        
         warningVariable = parseFloat(warning);
-        
-        
-        
     }
     
     function addTotal(billItems)
@@ -43,34 +45,32 @@ module.exports = function ()
     // update the correct total
             if (billItems === "call")
             {
-                //
-                // time : new Date()
-               // if(totalCostbill < criticalVariable){
-                    callsTotalBill += callCostVariable;
+                callsTotalBill += callCostVariable;
+                let newDate = new Date();
             }
-               
-           // }
-            if (billItems === "sms")
+            else if (billItems === "sms")
             {
-                //if (totalCostbill < criticalVariable){
-                    
                    smsTotalBill += smsCostVariable; 
-                
-            
+                   let newDate = new Date();
             }
     }
 
     function colorChangeRadio()
     {
-        if (totalCostbill>= getWarningValue() )
+        //console.log('criticalVariable: ' + criticalVariable);
+        //console.log('totalCostbill: ' + totalCostbill);
+        
+        
+        if(totalCostbill > criticalVariable)
+        {
+            color = 'danger';
+            return color;
+          
+        }
+        else if (totalCostbill > warningVariable)
         {
             color = 'warning';
             return color;
-        }
-        
-        else if(totalCostbill >= getCriticalValue()){
-            color = 'danger';
-          
         }
     }
 
@@ -83,7 +83,7 @@ module.exports = function ()
     
     function total(){
 		totalCostbill = callsTotalBill + smsTotalBill;
-		return totalCostbill.toFixed(2);
+		return totalCostbill;
 	}
     
     

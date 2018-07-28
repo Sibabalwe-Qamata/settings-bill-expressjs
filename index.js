@@ -74,10 +74,6 @@ app.post('/settings', function(req,res){
       warningLevel,
       criticalLevel
     };
-
-    // process data
-   // globalSetings = settings;
-
     // note that data can be sent to the template
     res.render('home', {settings})
 
@@ -88,7 +84,6 @@ app.post('/settings', function(req,res){
 
 1. Need to add the timestamp in the object as well.
 **/
-
 app.post('/action', function(req, res)
 {
     let item = req.body.billItemTypeWithSettings;
@@ -96,15 +91,14 @@ app.post('/action', function(req, res)
     console.log(item)
     settingsBill.sumBill(item);
     
-  
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),
-      totalPrice: settingsBill.sumTotal()
-   
+      totalPrice: settingsBill.sumTotal(),
+      color:settingsBill.colors()
   }
   console.log('Total: ',prices.callPrice);
-
+  console.log('Color Pick: ',settingsBill.colors());
     res.render('home', { prices});
 
 });
