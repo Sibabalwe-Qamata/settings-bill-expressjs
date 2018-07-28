@@ -28,6 +28,9 @@ app.engine('handlebars', exphbs(
     }
 }));
 
+//To view handlebars engine ...
+app.set('view engine', 'handlebars');
+
 //Static Resource
 app.use(express.static('public'));
 
