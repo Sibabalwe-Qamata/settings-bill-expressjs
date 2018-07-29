@@ -35,32 +35,35 @@ module.exports = function ()
     
     function setWarning(warning)
     {
-        console.log(warning);
-        
         warningVariable = parseFloat(warning);
     }
     
     function addTotal(billItems)
     {
     // update the correct total
+
+            let bill =
+            {  Type: billItems,
+                TimeStamp: new Date()
+            }
+
             if (billItems === "call")
             {
                 callsTotalBill += callCostVariable;
-                let newDate = new Date();
+                bill.Cost = callsTotalBill;
+                
             }
             else if (billItems === "sms")
             {
-                   smsTotalBill += smsCostVariable; 
-                   let newDate = new Date();
+                   smsTotalBill += smsCostVariable;
+                   bill.Cost. = smsTotalBill;      
             }
+            billArray.unShift(bill);
     }
+
 
     function colorChangeRadio()
     {
-        //console.log('criticalVariable: ' + criticalVariable);
-        //console.log('totalCostbill: ' + totalCostbill);
-        
-        
         if(totalCostbill > criticalVariable)
         {
             color = 'danger';
@@ -79,7 +82,11 @@ module.exports = function ()
     function smsTotal () {return smsTotalBill.toFixed(2);}
     function getCallCost() { return callCostVariable;}
 	function getCriticalValue(){return criticalVariable.toFixed(2);}
-	function getWarningValue(){return warningVariable.toFixed(2);}
+    function getWarningValue(){return warningVariable.toFixed(2);}
+    
+    function getBillRecords(){ 
+        return billArray
+    }
     
     function total(){
 		totalCostbill = callsTotalBill + smsTotalBill;
@@ -104,7 +111,8 @@ module.exports = function ()
             getCallPrice:getCallCost,
             sumTotal: total,
             sumBill: addTotal,
-            colors: colorChangeRadio
+            colors: colorChangeRadio,
+            getBill: getBillRecords
 
         }
 }

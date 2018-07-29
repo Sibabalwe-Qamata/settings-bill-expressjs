@@ -25,7 +25,7 @@ describe('Testing SettingsBill', function(){
 
         assert.equal(SettingBill.colors(), 'warning');
     } )
-    it('Should return warning or danger ', function(){
+    it('Should return danger ', function(){
         let SettingBill = settingBill();
         SettingBill.calls(2.75);
         SettingBill.sms(0.75);

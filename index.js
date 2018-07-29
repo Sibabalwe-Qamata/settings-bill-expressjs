@@ -66,7 +66,7 @@ app.post('/settings', function(req,res){
     settingsBill.critical(criticalLevel);
     settingsBill.warning(warningLevel);
 
-    console.log("Call Price: ", settingsBill.getCallPrice());
+    //console.log("Call Price: ", settingsBill.getCallPrice());
 
     let settings = {
       smsCost,
@@ -88,17 +88,17 @@ app.post('/action', function(req, res)
 {
     let item = req.body.billItemTypeWithSettings;
   
-    console.log(item)
+    //console.log(item)
     settingsBill.sumBill(item);
     
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),
       totalPrice: settingsBill.sumTotal(),
-      color:settingsBill.colors()
+      color:settingsBill.colors(),
   }
-  console.log('Total: ',prices.callPrice);
-  console.log('Color Pick: ',settingsBill.colors());
+//   console.log('Total: ',prices.callPrice);
+//   console.log('Color Pick: ',settingsBill.colors());
     res.render('home', { prices});
 
 });
@@ -107,37 +107,33 @@ app.post('/action', function(req, res)
 //show all the actions - display the timestamps using fromNow and display a total cost for all the actions on the screen
 app.get('/actions', function(req, res)
 {
-
-
-    /**let Bill = {
-        callBill: settingsBill.sumCall(),
-        smsBill: settingsBill.sumSms(),
-        totalBill: settingsBill.sumTotal()
-    }**/
-
-    //res.render('home', {Bill});
+    let billRecList =  settingsBill.getBill();
+    res.render('Records', {billRecList});
 });
 
 //display all the sms or call actions - display the timestamps using fromNow and display a total cost for the selected action.
 
-// app.get('/action/:type', function (req, res) {
-//     let costType = req.params.costType;
+app.get('/action/:type', function (req, res) {
+    let costType = req.params.costType;
 
-//     let cost = 0;
-//     //lookup cost for costType
-//     if (costType === 'sms'){
-//         cost = settings.smsCost;
-//     } else if (costType === 'call') {
-//         cost = settings.callCost;
-//     }
+    let billRecList = settingsBill.getBill(costType);
 
-//     req.render('cost', {
-//         costType,
-//         cost
-//     });
+    res.render('Records', {billRecList});
+
+    //lookup cost for costType
+    // if (costType === 'sms'){
+    //     cost = settings.smsCost;
+    // } else if (costType === 'call') {
+    //     cost = settings.callCost;
+    // }
+
+    // req.render('cost', {
+    //     costType,
+    //     cost
+    // });
     
 
-// });
+});
 
 //--------------------------------------------------------------------------------------------------------------------------//
 let PORT = process.env.PORT || 3007;
