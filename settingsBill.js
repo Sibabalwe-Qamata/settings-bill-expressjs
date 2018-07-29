@@ -56,9 +56,9 @@ module.exports = function ()
             else if (billItems === "sms")
             {
                    smsTotalBill += smsCostVariable;
-                   bill.Cost. = smsTotalBill;      
+                   bill.Cost = smsTotalBill;      
             }
-            billArray.unShift(bill);
+            billArray.unshift(bill);
     }
 
 
@@ -84,8 +84,14 @@ module.exports = function ()
 	function getCriticalValue(){return criticalVariable.toFixed(2);}
     function getWarningValue(){return warningVariable.toFixed(2);}
     
-    function getBillRecords(){ 
-        return billArray
+    function getBillRecords(type){
+        if(type === "" || type === undefined){
+            return billArray;
+        } 
+        else{
+            return billArray.filter( current => current.type === type);
+        }
+       
     }
     
     function total(){

@@ -15,9 +15,9 @@
             {{#each billArray}}
                 <table >
                     <tr>
-                        <td>type:</td><td>{{type}}</td>
-                        <td>price:</td><td>{{price}}</td>
-                        <td>date:</td><td>{{updatedDate}}</td>
+                        <td>type:</td><td>{{billArray.Type}}</td>
+                        <td>price:</td><td>{{billArray.Cost}}</td>
+                        <td>date:</td><td>{{billArray.TimeStamp}}</td>
                     </tr>
                 </table>
            {{/each}}      
