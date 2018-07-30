@@ -3,103 +3,113 @@
 //Exporting the Moment modules
 const Moment = require('moment');
 let moment = Moment();
-module.exports = function ()
-{
-        let callsTotalBill = 0;
-        let smsTotalBill = 0;
-        let totalCostbill = 0; 
+module.exports = function () {
+    let callsTotalBill = 0;
+    let smsTotalBill = 0;
+    let totalCostbill = 0;
 
-        let warningVariable = 0;
-        let criticalVariable = 0;
-        let smsCostVariable =0;
-        let callCostVariable =0;
+    let warningVariable = 0;
+    let criticalVariable = 0;
+    let smsCostVariable = 0;
+    let callCostVariable = 0;
 
-        let color = '';
+    let color = '';
 
-        let billArray = [];
-        
-    function setCallCost(itemCall)
-    {
+    let billArray = [];
+
+    function setCallCost(itemCall) {
         callCostVariable = parseFloat(itemCall);
     }
-    
-    function setSmsCost(itemSmS)
-    {
-       	smsCostVariable = parseFloat(itemSmS); 
+
+    function setSmsCost(itemSmS) {
+        smsCostVariable = parseFloat(itemSmS);
     }
-    
-    function setCriticalWarning(itemCritical)
-    {
+
+    function setCriticalWarning(itemCritical) {
         criticalVariable = parseFloat(itemCritical);
     }
-    
-    function setWarning(warning)
-    {
+
+    function setWarning(warning) {
         warningVariable = parseFloat(warning);
     }
-    
-    function addTotal(billItems)
-    {
-    // update the correct total
 
-            let bill =
-            {  Type: billItems,
+    function addTotal(billItems) {
+        // update the correct total
+
+
+        if (totalCostbill < criticalVariable) 
+        {
+
+            let bill = {
+                Type: billItems,
                 TimeStamp: new Date()
             }
 
-            if (billItems === "call")
-            {
+            if (billItems === "call") {
                 callsTotalBill += callCostVariable;
-                bill.Cost = callsTotalBill;
-                
-            }
-            else if (billItems === "sms")
-            {
-                   smsTotalBill += smsCostVariable;
-                   bill.Cost = smsTotalBill;      
+                bill.Cost = callCostVariable;
+
+            } else if (billItems === "sms") {
+                smsTotalBill += smsCostVariable;
+                bill.Cost = smsCostVariable;
             }
             billArray.unshift(bill);
+        }
+
     }
 
 
-    function colorChangeRadio()
-    {
-        if(totalCostbill > criticalVariable)
-        {
+    function colorChangeRadio() {
+        if (totalCostbill > criticalVariable) {
             color = 'danger';
             return color;
-          
-        }
-        else if (totalCostbill > warningVariable)
-        {
+
+        } else if (totalCostbill > warningVariable) {
             color = 'warning';
             return color;
         }
     }
 
-    
-    function callTotal() {return callsTotalBill.toFixed(2);}
-    function smsTotal () {return smsTotalBill.toFixed(2);}
-    function getCallCost() { return callCostVariable;}
-	function getCriticalValue(){return criticalVariable.toFixed(2);}
-    function getWarningValue(){return warningVariable.toFixed(2);}
-    
-    function getBillRecords(type){
-        if(type === "" || type === undefined){
+
+    function callTotal() {
+        return callsTotalBill.toFixed(2);
+    }
+
+    function smsTotal() {
+        return smsTotalBill.toFixed(2);
+    }
+
+    function getCallCost() {
+        return callCostVariable.toFixed(2);
+    }
+
+    function getSMSCost() {
+        return callCostVariable.toFixed(2);
+    }
+
+    function getCriticalValue() {
+        return criticalVariable.toFixed(2);
+    }
+
+    function getWarningValue() {
+        return warningVariable.toFixed(2);
+    }
+
+    function getBillRecords(type) {
+        if (type === "" || type === undefined) {
             return billArray;
-        } 
-        else{
-            
-            return billArray.filter( current => current.Type === type);
+        } else {
+
+            return billArray.filter(current => current.Type === type);
         }
-       
+
     }
-    
-    function total(){
-		totalCostbill = callsTotalBill + smsTotalBill;
-		return totalCostbill.toFixed(2);
+
+    function total() {
+        totalCostbill = callsTotalBill + smsTotalBill;
+        return totalCostbill.toFixed(2);
     }
-    
+
     // function resetValues (){
     //     resetPriveValues = 
     //     {
@@ -109,32 +119,30 @@ module.exports = function ()
     //     }
 
     // }
-    
-    
-    return{
-            
-            calls : setCallCost,
-            sms: setSmsCost,
-            critical: setCriticalWarning,
-            warning: setWarning,
-		
-		
-            sumCall: callTotal,
-            sumSms: smsTotal,
-			getWarning: getWarningValue,
-            getCritical: getCriticalValue,
 
 
-            getCallPrice:getCallCost,
-            sumTotal: total,
-            sumBill: addTotal,
-            colors: colorChangeRadio,
-            getBill: getBillRecords,
+    return {
 
-            // getResetValues: resetPriveValues
+        calls: setCallCost,
+        sms: setSmsCost,
+        critical: setCriticalWarning,
+        warning: setWarning,
 
-        }
+
+        sumCall: callTotal,
+        sumSms: smsTotal,
+        getWarning: getWarningValue,
+        getCritical: getCriticalValue,
+
+
+        getCallPrice: getCallCost,
+        getSMSPrice: getSMSCost,
+        sumTotal: total,
+        sumBill: addTotal,
+        colors: colorChangeRadio,
+        getBill: getBillRecords
+
+        // getResetValues: resetPriveValues
+
+    }
 }
-
-
-

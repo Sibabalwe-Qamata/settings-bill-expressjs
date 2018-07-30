@@ -48,7 +48,8 @@ app.use(bodyParser.json())
 //--------------------------Routes -------------------------------------------//
 
 app.get("/", function(req, res){
-    res.render("home");
+  
+    res.render("home", );
   });
   
 //set the settings - sms & call price and the warning & critical level
@@ -67,6 +68,13 @@ app.post('/settings', function(req,res){
     settingsBill.warning(warningLevel);
 
     //console.log("Call Price: ", settingsBill.getCallPrice());
+    let keepValue = {
+        call:callCost,
+        sms: smsCost,
+        critical: criticalLevel,
+        warning: warningLevel
+
+    }
 
     let settings = {
       smsCost,
@@ -75,7 +83,7 @@ app.post('/settings', function(req,res){
       criticalLevel
     };
     // note that data can be sent to the template
-    res.render('home', {settings})
+    res.render('home', {settings,keepValue })
 
 });
 
@@ -91,6 +99,13 @@ app.post('/action', function(req, res)
     //console.log(item)
     settingsBill.sumBill(item);
     
+    let keepValue = {
+        call:settingsBill.getCallPrice(),
+        sms: settingsBill.getSMSPrice(),
+        critical: settingsBill.getCritical(),
+        warning: settingsBill.getWarning()
+
+    }
     let prices = {
       callPrice: settingsBill.sumCall(),
       smsPrice: settingsBill.sumSms(),
@@ -99,7 +114,7 @@ app.post('/action', function(req, res)
   }
 //   console.log('Total: ',prices.callPrice);
 //   console.log('Color Pick: ',settingsBill.colors());
-    res.render('home', { prices});
+    res.render('home', { prices, keepValue });
 
 });
 
@@ -119,23 +134,10 @@ app.get('/actions/:type', function (req, res) {
     let costType = req.params.type;
 
     let billRecList = settingsBill.getBill(costType); 
-    console.log('am here',billRecList);
+    //console.log('am here',billRecList);
 
-    res.render('records', {billRecList:billRecList});
-
-    //lookup cost for costType
-    // if (costType === 'sms'){
-    //     cost = settings.smsCost;
-    // } else if (costType === 'call') {
-    //     cost = settings.callCost;
-    // }
-
-    // req.render('cost', {
-    //     costType,
-    //     cost
-    // });
+    res.render('records', {billArray:billRecList});
     
-
 });
 
 //--------------------------------------------------------------------------------------------------------------------------//
