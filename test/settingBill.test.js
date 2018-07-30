@@ -4,13 +4,7 @@ let settingBill = require('../settingsBill.js');
 
 describe('Testing SettingsBill', function(){
 
-    it('Should return call total', function(){
-        let SettingBill = settingBill();
-        SettingBill.calls(2.75);
-        SettingBill.sumBill('call');
-
-        assert.equal(SettingBill.sumCall(), 2.75);
-    } )
+   
 
     it('Should return warning ', function(){
         let SettingBill = settingBill();
@@ -40,7 +34,7 @@ describe('Testing SettingsBill', function(){
         assert.equal(SettingBill.colors(), 'danger');
     } )
 
-    it('Should return the critical level', function(){
+    it('Should return the critical level 1', function(){
         let SettingBill = settingBill();
         SettingBill.calls(2.00);
         SettingBill.sms(1.00);
@@ -54,7 +48,45 @@ describe('Testing SettingsBill', function(){
         SettingBill.sumBill('call');
  
 
-        assert.equal(SettingBill.sumTotal(), 7.00);
+        assert.equal(SettingBill.sumTotal(), '9.00');
+    } )
+
+
+    it('Should return the critical level 2', function(){
+        let SettingBill = settingBill();
+        SettingBill.calls(2.00);
+        SettingBill.sms(1.00);
+        SettingBill.critical(7.00);
+        SettingBill.warning(5.75);
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        
+        SettingBill.sumBill('sms');
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('sms');
+        SettingBill.sumBill('call');
+
+        assert.equal(SettingBill.sumTotal(), '12.00');
+    } )
+
+
+    it('Should return the critical level 3', function(){
+        let SettingBill = settingBill();
+        SettingBill.calls(2.00);
+        SettingBill.sms(1.00);
+        SettingBill.critical(12.00);
+        SettingBill.warning(5.75);
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        
+        SettingBill.sumBill('sms');
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('sms');
+        SettingBill.sumBill('call');
+
+        assert.equal(SettingBill.sumTotal(), '12.00');
     } )
 
 

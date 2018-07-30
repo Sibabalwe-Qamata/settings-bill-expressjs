@@ -23,7 +23,7 @@ app.engine('handlebars', exphbs(
     {
         "updatedDate":function()
         {
-             return Moment(this.timestamp).fromNow()
+             return Moment(this.TimeStamp).fromNow()
         }
     }
 }));
@@ -49,7 +49,7 @@ app.use(bodyParser.json())
 
 app.get("/", function(req, res){
   
-    res.render("home", );
+    res.render("home");
   });
   
 //set the settings - sms & call price and the warning & critical level
