@@ -60,7 +60,12 @@ app.post('/settings', function(req,res){
     let criticalLevel = req.body.criticalLevel;
 
     //console.log(callCost);
-    
+    let prices = {
+        callPrice: settingsBill.sumCall(),
+        smsPrice: settingsBill.sumSms(),
+        totalPrice: settingsBill.sumTotal()
+        
+    }
 
     settingsBill.calls(callCost);
     settingsBill.sms(smsCost);
@@ -83,7 +88,7 @@ app.post('/settings', function(req,res){
       criticalLevel
     };
     // note that data can be sent to the template
-    res.render('home', {settings,keepValue })
+    res.render('home', {settings,keepValue,prices})
 
 });
 
