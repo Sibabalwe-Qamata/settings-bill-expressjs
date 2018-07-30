@@ -89,7 +89,10 @@ module.exports = function ()
             return billArray;
         } 
         else{
-            return billArray.filter( current => current.type === type);
+
+              
+
+            return billArray.filter( current => current.Type === type);
         }
        
     }

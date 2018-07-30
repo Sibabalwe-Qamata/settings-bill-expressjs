@@ -2,8 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    
   </head>
   <body>
         <div class="container">
@@ -12,15 +11,17 @@
                       <h2>
                           Phone Bill Records:
                       </h2>
-            {{#each billArray}}
+            
                 <table >
-                    <tr>
-                        <td>type:</td><td>{{billArray.Type}}</td>
-                        <td>price:</td><td>{{billArray.Cost}}</td>
-                        <td>date:</td><td>{{billArray.TimeStamp}}</td>
+                    {{#each billArray}}
+                    <tr> 
+                        <td>type:</td><td>{{Type}}</td>
+                        <td>price:</td><td>{{Cost}}</td>
+                        <td>date:</td><td>{{updatedDate}}</td>
                     </tr>
+                      {{/each}} 
                 </table>
-           {{/each}}      
+              
                 </div> 
             </div>
         </div>
