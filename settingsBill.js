@@ -89,9 +89,7 @@ module.exports = function ()
             return billArray;
         } 
         else{
-
-              
-
+            
             return billArray.filter( current => current.Type === type);
         }
        
@@ -100,7 +98,17 @@ module.exports = function ()
     function total(){
 		totalCostbill = callsTotalBill + smsTotalBill;
 		return totalCostbill.toFixed(2);
-	}
+    }
+    
+    // function resetValues (){
+    //     resetPriveValues = 
+    //     {
+    //         callsTotalBill : 0.00,
+    //         smsTotalBill : 0.00,
+    //         totalCostbill :0.00  
+    //     }
+
+    // }
     
     
     return{
@@ -121,7 +129,9 @@ module.exports = function ()
             sumTotal: total,
             sumBill: addTotal,
             colors: colorChangeRadio,
-            getBill: getBillRecords
+            getBill: getBillRecords,
+
+            // getResetValues: resetPriveValues
 
         }
 }

@@ -40,5 +40,22 @@ describe('Testing SettingsBill', function(){
         assert.equal(SettingBill.colors(), 'danger');
     } )
 
+    it('Should return the critical level', function(){
+        let SettingBill = settingBill();
+        SettingBill.calls(2.00);
+        SettingBill.sms(1.00);
+        SettingBill.critical(7.00);
+        SettingBill.warning(5.75);
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        SettingBill.sumBill('call');
+        
+        SettingBill.sumBill('sms');
+        SettingBill.sumBill('call');
+ 
+
+        assert.equal(SettingBill.sumTotal(), 7.00);
+    } )
+
 
 })

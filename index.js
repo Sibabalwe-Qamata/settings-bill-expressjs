@@ -110,7 +110,7 @@ app.get('/actions', function(req, res)
     let billRecList =  settingsBill.getBill();
 
     // console.log("Bill array", billRecList);
-    res.render('Records', {billArray:billRecList});
+    res.render('records', {billArray:billRecList});
 });
 
 //display all the sms or call actions - display the timestamps using fromNow and display a total cost for the selected action.
@@ -121,7 +121,7 @@ app.get('/actions/:type', function (req, res) {
     let billRecList = settingsBill.getBill(costType); 
     console.log('am here',billRecList);
 
-    res.render('Records', {billArray:billRecList});
+    res.render('records', {billRecList:billRecList});
 
     //lookup cost for costType
     // if (costType === 'sms'){
