@@ -47,11 +47,11 @@ module.exports = function () {
 
             if (billItems === "call") {
                 callsTotalBill += callCostVariable;
-                bill.Cost = callCostVariable;
+                bill.Cost = callCostVariable.toFixed(2);
 
             } else if (billItems === "sms") {
                 smsTotalBill += smsCostVariable;
-                bill.Cost = smsCostVariable;
+                bill.Cost = smsCostVariable.toFixed(2);
             }
             billArray.unshift(bill);
         }
