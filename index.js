@@ -50,12 +50,20 @@ app.use(bodyParser.json())
 app.get("/", function(req, res){
   
     let prices = {
-        callPrice:'0.00',
-        smsPrice: '0.00',
-        totalPrice: '0.00'
+        callPrice: settingsBill.sumCall(),
+        smsPrice: settingsBill.sumSms(),
+        totalPrice: settingsBill.sumTotal()
         
     }
-    res.render("home", {prices});
+
+    let keepValue = {
+        call:settingsBill.getCallPrice(),
+        sms: settingsBill.getSMSPrice(),
+        critical: settingsBill.getCritical(),
+        warning: settingsBill.getWarning()
+
+    }
+    res.render("home", {prices, keepValue});
   });
   
 //set the settings - sms & call price and the warning & critical level
@@ -70,7 +78,6 @@ app.post('/settings', function(req,res){
         callPrice: settingsBill.sumCall(),
         smsPrice: settingsBill.sumSms(),
         totalPrice: settingsBill.sumTotal()
-        
     }
 
     settingsBill.calls(callCost);

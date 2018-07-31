@@ -5,14 +5,19 @@
         </h2>
 
         <table>
+
+
+
+            <tr>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Timestamp</th>
+            </tr>
             {{#each billArray}}
             <tr>
-                <td>Type:</td>
                 <td>{{Type}}</td>
-                <td>Price:</td>
                 <td>R{{Cost}}</td>
-                <td>Timestamp:</td>
-                <td>{{updatedDate}} : {{TimeStamp}} </td>
+                <td>{{updatedDate}} </td>
             </tr>
             {{/each}}
         </table>
