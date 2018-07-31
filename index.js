@@ -49,7 +49,13 @@ app.use(bodyParser.json())
 
 app.get("/", function(req, res){
   
-    res.render("home");
+    let prices = {
+        callPrice:'0.00',
+        smsPrice: '0.00',
+        totalPrice: '0.00'
+        
+    }
+    res.render("home", {prices});
   });
   
 //set the settings - sms & call price and the warning & critical level
