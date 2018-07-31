@@ -84,7 +84,7 @@ module.exports = function () {
     }
 
     function getSMSCost() {
-        return callCostVariable.toFixed(2);
+        return smsCostVariable.toFixed(2);
     }
 
     function getCriticalValue() {

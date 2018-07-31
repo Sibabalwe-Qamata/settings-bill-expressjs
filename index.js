@@ -87,6 +87,11 @@ app.post('/settings', function(req,res){
       warningLevel,
       criticalLevel
     };
+
+    console.log("Call Cost:", callCost);
+    console.log("SMS Cost:", smsCost);
+    console.log("Critical Cost:", criticalLevel);
+    console.log("Warning Cost:", warningLevel);
     // note that data can be sent to the template
     res.render('home', {settings,keepValue,prices})
 
